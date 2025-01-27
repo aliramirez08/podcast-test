@@ -9,10 +9,20 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 1  # Faster cloning, fetch only the latest commit
+
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm  # Change path if required for your action's dependencies
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
       - name: Run Feed Generator
         uses: aliramirez08/podcast-generator@main
         with:
-          feed_url: "https://example.com/feed"  # Provide the required feed_url
+          feed_url: "https://example.com/feed"  # Make sure this is highly available and responsive
           email: ${{ github.actor }}@localhost
           name: ${{ github.actor }}
