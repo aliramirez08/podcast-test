@@ -1,8 +1,11 @@
 name: Generate Podcast Feeds
+
 on: [push]
+
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
@@ -10,5 +13,6 @@ jobs:
       - name: Run Feed Generator
         uses: aliramirez08/podcast-generator@main
         with:
+          feed_url: "https://example.com/feed"  # Provide the required feed_url
           email: ${{ github.actor }}@localhost
           name: ${{ github.actor }}
