@@ -2,6 +2,9 @@ name: Generate Podcast Feeds
 
 on: [push]
 
+permissions: # Add permissions block at the top
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
